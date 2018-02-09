@@ -46,29 +46,29 @@ if [ "$nocrit" -eq 0 ]
 	then
 	        getHost
 	else
-	        echo -e "Keine $1 \n\n" >> $finalresult
+	        echo -e "No $1 \n\n" >> $finalresult
 fi
 rm -f $reportfile
 }
 
 # Create empty reportfile
 touch $reportfile
-echo "Täglicher Bericht icinga2 $date" > $finalresult
+echo "Daily report icinga2 $date" > $finalresult
 echo -e "\n" >> $finalresult
 /usr/bin/icingacli monitoring list services >> $completefile
 
 # Collect data
 echo "Critical:" >> $finalresult
 /usr/bin/icingacli monitoring list services | grep -n 'CRIT ' > $reportfile
-checkIfEmpty "kritischen Fehler!"
+checkIfEmpty "critical errors!"
 
 echo "Warning:" >> $finalresult
 /usr/bin/icingacli monitoring list services | grep -n 'WARN ' > $reportfile
-checkIfEmpty "Warnungen!"
+checkIfEmpty "warnings!"
 
 echo "Unknown:" >> $finalresult
 /usr/bin/icingacli monitoring list services | grep -n 'UNKN ' > $reportfile
-checkIfEmpty "unbekannten Fehler!"
+checkIfEmpty "unknown errors"
 
 # Formatting
 sed -i 's/   UP /UP /g' $finalresult
