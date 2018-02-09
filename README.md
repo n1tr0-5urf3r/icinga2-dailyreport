@@ -5,3 +5,6 @@
 
 ## Usage
 Just run the script or place it in a crontab. Add your sending and receiving domain at the end.
+
+## Example Output
+!(https://i.imgur.com/SdJFPdb.png)
